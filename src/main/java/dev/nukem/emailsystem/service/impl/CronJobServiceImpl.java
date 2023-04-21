@@ -51,9 +51,10 @@ public class CronJobServiceImpl implements CronJobService {
     }
 
     @Override
+    @Transactional
     public void deleteCronJob(final Long id) {
-        cancelCronJob(id);
         cronJobRepository.delete(findCronJobById(id));
+        cancelCronJob(id);
     }
 
     private CronJob findCronJobById(final Long id) {
